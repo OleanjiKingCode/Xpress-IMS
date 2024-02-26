@@ -1,5 +1,5 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
-import { EditFieldType } from "../types/FieldType";
+import { EditFieldType } from "../types/TableAreaTypes";
 
 const onFinish = (values: any) => {
   console.log("Success:", values);

@@ -1,11 +1,11 @@
 import { TableProps, Tag, Space } from "antd";
-import { DataType } from "../../types/Tabletype";
 import {
   CheckCircleOutlined,
   FolderOpenOutlined,
   StopOutlined,
 } from "@ant-design/icons";
 import { TableActions } from "../TableActions";
+import { DataType } from "../../types/TableAreaTypes";
 
 export const columns: TableProps<DataType>["columns"] = [
   {
