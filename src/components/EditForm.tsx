@@ -3,16 +3,20 @@ import { DataType, EditFieldType } from "../types/TableAreaTypes";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { editItem } from "../stores/dataSlice";
+import dayjs from "dayjs";
+import customParseFormat from "dayjs/plugin/customParseFormat";
 
 export const EditForm = ({ record }: { record: DataType }) => {
   const dispatch = useDispatch();
+  dayjs.extend(customParseFormat);
   const [loading, setLoading] = useState(false);
   const [editedRecord, setEditedRecord] = useState(record);
-  const [updatedValues, setUpdatedValues] = useState({} as Partial<DataType>);
 
-  const onFinish = (values: any) => {
+  const dateFormat = "YYYY-MM-DD";
+
+  const onFinish = (_values: any) => {
     setLoading(true);
-    dispatch(editItem({ id: record.key, updates: editedRecord }));
+    dispatch(editItem({ id: record.barcodeId, updates: editedRecord }));
     setLoading(false);
   };
 
@@ -111,7 +115,7 @@ export const EditForm = ({ record }: { record: DataType }) => {
         className="w-full"
       >
         <DatePicker
-          value={"2024-10-4"}
+          defaultValue={dayjs("2015-06-06", dateFormat)}
           onChange={(date) => {
             setEditedRecord({
               ...editedRecord,
