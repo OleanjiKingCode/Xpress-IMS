@@ -1,0 +1,90 @@
+/* @import "node_modules/@glidejs/glide/dist/css/glide.core.min.css"; */
+
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: "gelion-500";
+  src: url("./assets/fonts/Gelion-Regular.ttf");
+}
+
+@font-face {
+  font-family: "gelion-600";
+  src: url("./assets/fonts/Gelion-Medium.ttf");
+}
+
+@font-face {
+  font-family: "gelion-700";
+  src: url("./assets/fonts/Gelion-Black.ttf");
+}
+
+html,
+body {
+  font-family: "gelion-500";
+}
+
+.ant-upload {
+  width: 100%;
+}
+
+.ant-modal-content {
+  padding: 0px !important;
+}
+
+.ant-table-container {
+  border: 1px solid #ededed;
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline > li {
+  margin-left: 18px;
+}
+
+.ant-menu-light.ant-menu-inline .ant-menu-sub.ant-menu-inline {
+  margin-right: 15px;
+}
+
+.glide {
+  animation: glide 15s linear infinite;
+  /* overflow: hidden; */
+}
+
+@keyframes glide {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.glide-container {
+  position: relative;
+}
+
+.glide-container::before,
+.glide-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 5rem;
+  z-index: 9999;
+}
+
+/* .glide-container::before {
+  left: 0;
+  background: linear-gradient(90deg, white, transparent);
+}
+.glide-container::after {
+  right: 0;
+  background: linear-gradient(90deg, transparent, white);
+} */
+
+input {
+  background-color: transparent !important;
+}
+
+.ant-modal-root .ant-modal-wrap {
+  background-color: #000000a6 !important;
+}
