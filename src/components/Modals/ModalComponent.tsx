@@ -22,7 +22,7 @@ export const ModalComponent = ({
   return (
     <Modal
       open={open}
-      centered={centered}
+      centered={true}
       title={
         <div
           className={`text-left text-[1rem] font-[gelion-500] border-b-[2px] p-5`}
@@ -36,7 +36,7 @@ export const ModalComponent = ({
       style={{ padding: "20px" }}
       footer={false}
     >
-      {children}
+      <div className="h-[70vh] p-0 w-full">{children}</div>
     </Modal>
   );
 };

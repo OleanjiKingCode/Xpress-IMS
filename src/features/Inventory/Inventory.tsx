@@ -6,17 +6,23 @@ import { Navbar } from "../../components/Navbar/navbar";
 import { TableActionArea } from "../../components/TableActionArea/TableActionArea";
 import { ApprovalModal } from "../../components/Modals/ApprovalModal";
 import { CreateModal } from "../../components/Modals/CreateModal";
+import { TableRowModal } from "../../components/Modals/TableRowModal";
+import { DataType } from "../../types/TableAreaTypes";
 
 export const Inventory: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [approvalOpen, setApprovalOpen] = useState(false);
+  const [tableRowOpen, setTableRowOpen] = useState(false);
+  const [activeRowData, setActiveRowData] = useState<DataType>();
 
   const toggleModal = (state: boolean) => {
     setOpen(state);
   };
-
   const toggleApprovalModal = (state: boolean) => {
-    setOpen(state);
+    setApprovalOpen(state);
+  };
+  const toggleTableRowModal = (state: boolean) => {
+    setTableRowOpen(state);
   };
 
   return (
@@ -31,11 +37,14 @@ export const Inventory: React.FC = () => {
         <Table
           columns={columns}
           dataSource={data}
-          // onRow={(record, rowIndex) => {
-          //   return {
-          //     onClick: (event) => {},
-          //   };
-          // }}
+          onRow={(record, _rowIndex) => {
+            return {
+              onClick: () => {
+                setActiveRowData(record);
+                toggleTableRowModal(true);
+              },
+            };
+          }}
           scroll={{ x: scrollX }}
           className="text-white font-[gelion-600] w-full"
           locale={{
@@ -54,9 +63,15 @@ export const Inventory: React.FC = () => {
         <ApprovalModal
           open={approvalOpen}
           setOpen={setApprovalOpen}
-          toggleModal={toggleModal}
+          toggleModal={toggleApprovalModal}
         />
         <CreateModal open={open} setOpen={setOpen} toggleModal={toggleModal} />
+        <TableRowModal
+          open={tableRowOpen}
+          setOpen={setTableRowOpen}
+          toggleModal={toggleTableRowModal}
+          data={activeRowData}
+        />
       </section>
     </main>
   );

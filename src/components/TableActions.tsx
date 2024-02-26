@@ -3,7 +3,7 @@ import {
   FolderOpenOutlined,
   SyncOutlined,
 } from "@ant-design/icons";
-import { Space } from "antd";
+import { Button, Space } from "antd";
 import { useState } from "react";
 import { ModalComponent } from "./Modals/ModalComponent";
 import { EditForm } from "./EditForm";
@@ -20,19 +20,22 @@ export const TableActions = ({ record }: { record: any }) => {
   };
 
   return (
-    <Space size="middle">
-      <a onClick={showEditModal}>
-        <EditOutlined className="mr-1 text-blue-700 " />
+    <div className="flex justify-between w-full border-t-[1px] pt-5">
+      <div
+        onClick={showEditModal}
+        className="bg-blue-200 hover:bg-blue-600 px-6 py-2 rounded-lg cursor-pointer"
+      >
+        <EditOutlined className="mr-3 text-blue-900 " />
         Edit
-      </a>
-      <a>
-        <FolderOpenOutlined className="mr-1 text-yellow-500" />
+      </div>
+      <div className="bg-yellow-200 hover:bg-yellow-600 px-6 py-2 rounded-lg cursor-pointer">
+        <FolderOpenOutlined className="mr-3 text-yellow-500" />
         Details
-      </a>
-      <a>
-        <SyncOutlined className="mr-1 text-green-400" />
+      </div>
+      <div className="bg-green-200 hover:bg-green-600 px-6 py-2 rounded-lg cursor-pointer">
+        <SyncOutlined className="mr-3 text-green-400" />
         Reassign
-      </a>
+      </div>
       <ModalComponent
         open={editOpen}
         handleOk={() => {}}
@@ -46,6 +49,6 @@ export const TableActions = ({ record }: { record: any }) => {
           </div>
         }
       />
-    </Space>
+    </div>
   );
 };
