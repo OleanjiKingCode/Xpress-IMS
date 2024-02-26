@@ -36,7 +36,7 @@ export const ModalComponent = ({
       style={{ padding: "20px" }}
       footer={false}
     >
-      <div className="h-[70vh] p-0 w-full">{children}</div>
+      <div className="max-h-[80vh] p-0 w-full overflow-auto">{children}</div>
     </Modal>
   );
 };

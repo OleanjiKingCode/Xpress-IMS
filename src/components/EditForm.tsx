@@ -1,15 +1,25 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
-import { EditFieldType } from "../types/TableAreaTypes";
+import { DataType, EditFieldType } from "../types/TableAreaTypes";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { editItem } from "../stores/dataSlice";
 
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
+export const EditForm = ({ record }: { record: DataType }) => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
+  const [editedRecord, setEditedRecord] = useState(record);
+  const [updatedValues, setUpdatedValues] = useState({} as Partial<DataType>);
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
+  const onFinish = (values: any) => {
+    setLoading(true);
+    dispatch(editItem({ id: record.key, updates: editedRecord }));
+    setLoading(false);
+  };
 
-export const EditForm = ({ record }: { record: any }) => {
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
+
   return (
     <Form
       name="basic"
@@ -25,9 +35,11 @@ export const EditForm = ({ record }: { record: any }) => {
         rules={[{ required: true, message: "Please input product name!" }]}
       >
         <Input
-          value={record.productName}
+          value={editedRecord.productName}
           defaultValue={record.productName}
-          //onChange={(e) => {}}
+          onChange={(e) => {
+            setEditedRecord({ ...editedRecord, productName: e.target.value });
+          }}
           className="py-2 border-[#C4C4C4] text-[#000000]"
         />
       </Form.Item>
@@ -41,21 +53,28 @@ export const EditForm = ({ record }: { record: any }) => {
         ]}
       >
         <Input
-          value={record.barcodeId}
+          value={editedRecord.barcodeId}
           defaultValue={record.barcodeId}
-          // onChange={(e) => {}}
+          onChange={(e) => {
+            setEditedRecord({
+              ...editedRecord,
+              barcodeId: Number(e.target.value),
+            });
+          }}
           className="py-2 border-[#C4C4C4] text-[#000000]"
         />
       </Form.Item>
       <Form.Item<EditFieldType>
         label={<h2 className="text-[1rem] font-[gelion-500]">Product Type </h2>}
         name="editProductType"
-        rules={[{ required: true, message: "Please choose porduct type!" }]}
+        rules={[{ required: true, message: "Please choose product type!" }]}
       >
         <Select
-          defaultValue={record.productType}
+          defaultValue={editedRecord.productType}
           style={{ width: "100%" }}
-          // onChange={handleChange}
+          onChange={(value: string) => {
+            setEditedRecord({ ...editedRecord, productType: value });
+          }}
           options={[
             { value: "computer", label: "Computer" },
             { value: "chairs", label: "Chairs" },
@@ -69,7 +88,17 @@ export const EditForm = ({ record }: { record: any }) => {
         name="editCost"
         rules={[{ required: true, message: "Please input product cost!" }]}
       >
-        <Input type="number" value={record.cost} defaultValue={record.cost} />
+        <Input
+          type="number"
+          value={editedRecord.cost}
+          defaultValue={record.cost}
+          onChange={(e) => {
+            setEditedRecord({
+              ...editedRecord,
+              cost: parseFloat(e.target.value),
+            });
+          }}
+        />
       </Form.Item>
       <Form.Item<EditFieldType>
         label={
@@ -82,7 +111,13 @@ export const EditForm = ({ record }: { record: any }) => {
         className="w-full"
       >
         <DatePicker
-        //   onChange={onChange}
+          value={"2024-10-4"}
+          onChange={(date) => {
+            setEditedRecord({
+              ...editedRecord,
+              dop: date.toString(),
+            });
+          }}
         />
       </Form.Item>
       <div className="w-full flex justify-end">

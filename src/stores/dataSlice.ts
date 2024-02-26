@@ -20,7 +20,7 @@ const dataSlice = createSlice({
     editItem: (state, action) => {
       const { id, updates } = action.payload;
       const index = state.data.findIndex((item) => item.key === id);
-
+      console.log("cn.kzcxkjl");
       if (index !== -1) {
         state.data[index] = { ...state.data[index], ...updates };
       }

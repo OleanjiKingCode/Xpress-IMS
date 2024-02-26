@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Table } from "antd";
-import { columns, data } from "../../components/Data/TableDummy";
+import { columns } from "../../components/Data/TableDummy";
 import { Stats } from "../../components/Stats/Stats";
 import { Navbar } from "../../components/Navbar/navbar";
 import { TableActionArea } from "../../components/TableActionArea/TableActionArea";
@@ -8,12 +8,15 @@ import { ApprovalModal } from "../../components/Modals/ApprovalModal";
 import { CreateModal } from "../../components/Modals/CreateModal";
 import { TableRowModal } from "../../components/Modals/TableRowModal";
 import { DataType } from "../../types/TableAreaTypes";
+import { useSelector } from "react-redux";
+import { RootState } from "../../stores/rootReducer";
 
 export const Inventory: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [approvalOpen, setApprovalOpen] = useState(false);
   const [tableRowOpen, setTableRowOpen] = useState(false);
   const [activeRowData, setActiveRowData] = useState<DataType>();
+  const data = useSelector((state: RootState) => state.data.data);
 
   const toggleModal = (state: boolean) => {
     setOpen(state);
