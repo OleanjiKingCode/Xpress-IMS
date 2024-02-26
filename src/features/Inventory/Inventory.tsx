@@ -31,7 +31,25 @@ export const Inventory: React.FC = () => {
         <Table
           columns={columns}
           dataSource={data}
+          // onRow={(record, rowIndex) => {
+          //   return {
+          //     onClick: (event) => {},
+          //   };
+          // }}
+          scroll={{ x: scrollX }}
           className="text-white font-[gelion-600] w-full"
+          locale={{
+            emptyText: (
+              <div className="h-60 grid place-content-center">
+                <h1 className="text-[#182A2C] text-[1.5rem] font-[gelion-700]">
+                  No Assets
+                </h1>
+                <p className="text-[#182A2C] text-[1rem] font-[gelion-500]">
+                  There are no assets for in this table
+                </p>
+              </div>
+            ),
+          }}
         />
         <ApprovalModal
           open={approvalOpen}

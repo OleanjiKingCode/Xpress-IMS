@@ -4,7 +4,6 @@ import {
   FolderOpenOutlined,
   StopOutlined,
 } from "@ant-design/icons";
-import { TableActions } from "../TableActions";
 import { DataType } from "../../types/TableAreaTypes";
 
 export const columns: TableProps<DataType>["columns"] = [
@@ -23,12 +22,12 @@ export const columns: TableProps<DataType>["columns"] = [
     title: "Product Type",
     dataIndex: "productType",
     key: "productType",
-    render: (text) => <b>{text}</b>,
   },
   {
     title: "Cost",
     dataIndex: "cost",
     key: "cost",
+    render: (text) => <>NGN {text}</>,
   },
   {
     title: "Date Of Purchase",
@@ -53,11 +52,11 @@ export const columns: TableProps<DataType>["columns"] = [
       );
     },
   },
-  {
-    title: "Action",
-    key: "action",
-    render: (_, record) => <TableActions record={record} />,
-  },
+  // {
+  //   title: "Action",
+  //   key: "action",
+  //   render: (_, record) => <TableActions record={record} />,
+  // },
 ];
 
 export const data: DataType[] = [
