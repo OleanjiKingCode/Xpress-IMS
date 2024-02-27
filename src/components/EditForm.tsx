@@ -1,16 +1,25 @@
 import { Button, DatePicker, Form, Input, Select } from "antd";
 import { DataType, EditFieldType } from "../types/TableAreaTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { editItem } from "../stores/dataSlice";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 
-export const EditForm = ({ record }: { record: DataType }) => {
+export const EditForm = ({
+  record,
+  editedRecord,
+  setEditedRecord,
+  hideEditModal,
+}: {
+  record: DataType;
+  editedRecord: DataType;
+  setEditedRecord: React.Dispatch<any>;
+  hideEditModal: () => void;
+}) => {
   const dispatch = useDispatch();
   dayjs.extend(customParseFormat);
   const [loading, setLoading] = useState(false);
-  const [editedRecord, setEditedRecord] = useState(record);
 
   const dateFormat = "YYYY-MM-DD";
 
@@ -18,6 +27,7 @@ export const EditForm = ({ record }: { record: DataType }) => {
     setLoading(true);
     dispatch(editItem({ id: record.barcodeId, updates: editedRecord }));
     setLoading(false);
+    hideEditModal();
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -80,10 +90,10 @@ export const EditForm = ({ record }: { record: DataType }) => {
             setEditedRecord({ ...editedRecord, productType: value });
           }}
           options={[
-            { value: "computer", label: "Computer" },
-            { value: "chairs", label: "Chairs" },
-            { value: "furnitures", label: "Furnitures" },
-            { value: "computer accessories", label: "Computer Accessories" },
+            { value: "Computer", label: "Computer" },
+            { value: "Chairs", label: "Chairs" },
+            { value: "Furnitures", label: "Furnitures" },
+            { value: "Computer Accessories", label: "Computer Accessories" },
           ]}
         />
       </Form.Item>

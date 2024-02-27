@@ -23,8 +23,6 @@ export const getThemeConfig = (): ThemeConfig | undefined => {
       },
       Button: {
         colorPrimaryHover: "#16a34a",
-        activeBorderColor: "#16a34a",
-        activeShadow: "#ffffff",
         defaultHoverColor: "#000",
       },
       Input: {

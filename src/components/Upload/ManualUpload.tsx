@@ -38,7 +38,6 @@ const ManualUpload = () => {
     <Form
       name="basic"
       style={{ width: "100%" }}
-      initialValues={{ remember: true }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
       autoComplete="off"
@@ -89,10 +88,10 @@ const ManualUpload = () => {
             setEditedRecord({ ...editedRecord, productType: value });
           }}
           options={[
-            { value: "computer", label: "Computer" },
-            { value: "chairs", label: "Chairs" },
-            { value: "furnitures", label: "Furnitures" },
-            { value: "computer accessories", label: "Computer Accessories" },
+            { value: "Computer", label: "Computer" },
+            { value: "Chairs", label: "Chairs" },
+            { value: "Furnitures", label: "Furnitures" },
+            { value: "Computer Accessories", label: "Computer Accessories" },
           ]}
         />
       </Form.Item>

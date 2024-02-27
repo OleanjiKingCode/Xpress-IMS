@@ -1,10 +1,12 @@
 import { EditOutlined, SyncOutlined } from "@ant-design/icons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ModalComponent } from "./Modals/ModalComponent";
 import { EditForm } from "./EditForm";
+import { Form } from "antd";
 
 export const TableActions = ({ record }: { record: any }) => {
   const [editOpen, setEditOpen] = useState(false);
+  const [editedRecord, setEditedRecord] = useState(record);
 
   const showEditModal = () => {
     setEditOpen(true);
@@ -36,7 +38,12 @@ export const TableActions = ({ record }: { record: any }) => {
         title={`Edit ${record.productName}`}
         children={
           <div className="p-3">
-            <EditForm record={record} />
+            <EditForm
+              record={record}
+              editedRecord={editedRecord}
+              setEditedRecord={setEditedRecord}
+              hideEditModal={hideEditModal}
+            />
           </div>
         }
       />
